@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  warung-app:
+    container_name: warung-co-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3010:3000"
+    environment:
+      - DATABASE_URL=postgresql://rizaldi:15031996@postgres:5432/warung_indah
+      - NEXTAUTH_URL=https://app.zelixa.my.id
+      - NEXTAUTH_SECRET=co-system-secret-key-2026-v1
+
+      - MINIO_ENDPOINT=minio
+      - MINIO_PORT=9000
+      - MINIO_ACCESS_KEY=rizaldi
+      - MINIO_SECRET_KEY=15031996
+      - MINIO_BUCKET=warung
+      - MINIO_USE_SSL=false
+
+      - NEXT_PUBLIC_MINIO_URL=https://minio.zelixa.my.id
+    networks:
+      - global-network
+
+networks:
+  global-network:
+    external: true
