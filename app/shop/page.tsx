@@ -46,7 +46,7 @@ export default function ShopPage() {
     }
   }
 
-  const categories = ["All", ...new Set(products.map(p => p.category))];
+  const categories: string[] = ["All", ...Array.from(new Set(products.map(p => p.category).filter((c): c is string => c !== null)))];
 
   const filteredProducts = products.filter(p => {
     const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
@@ -106,7 +106,7 @@ export default function ShopPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filteredProducts.map((product) => {
+        {filteredProducts.map((product: any) => {
           const cartItem = cart.find(item => item.id === product.id);
           const inCart = !!cartItem;
 

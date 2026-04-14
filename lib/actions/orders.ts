@@ -198,7 +198,7 @@ export async function getTopSellingProducts(limit: number = 5) {
 
     const products = await prisma.product.findMany({
       where: {
-        id: { in: topSelling.map(item => item.productId) }
+        id: { in: topSelling.map(item => item.productId).filter((id): id is string => id !== null) }
       }
     });
 

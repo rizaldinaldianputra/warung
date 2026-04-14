@@ -141,7 +141,7 @@ export const generateSuratJalanPDF = (order: any) => {
       item.product.unit || 'pcs',
       ''
     ]),
-    headStyles: { fillColor: [241, 245, 249], textColor: [15, 23, 42], lineWidth: 0.1, lineColor: [200] },
+    headStyles: { fillColor: [241, 245, 249], textColor: [15, 23, 42], lineWidth: 0.1, lineColor: [200, 200, 200] },
     bodyStyles: { lineWidth: 0.1, lineColor: [226, 232, 240] },
     margin: { left: 20, right: 20 },
   });

@@ -270,7 +270,7 @@ export default function ProductsPage() {
                 </TableCell>
               </TableRow>
             ) : (
-              products.map((product) => (
+              products.map((product: any) => (
                 <TableRow key={product.id}>
                   <TableCell>
                     <div className="flex items-center gap-3">

@@ -172,7 +172,7 @@ export default function OrderDetailPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {order.items.map((item) => (
+                {order.items.map((item: any) => (
                   <TableRow key={item.id}>
                     <TableCell>
                       <div className="flex flex-col">

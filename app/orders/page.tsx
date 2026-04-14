@@ -117,7 +117,7 @@ import { getOrders, updateOrderStatus } from "@/lib/actions/orders";
                 </TableCell>
               </TableRow>
             ) : (
-              orders.map((order) => (
+              orders.map((order: any) => (
                 <TableRow key={order.id} className="group">
                   <TableCell className="font-semibold text-navy">
                     {order.id.split("-")[0]}
