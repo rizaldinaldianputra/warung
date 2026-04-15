@@ -15,12 +15,12 @@ services:
       NEXTAUTH_URL: http://43.129.54.11:3010
       NEXTAUTH_SECRET: co-system-secret-key-2026-v1
       NEXTAUTH_TRUST_HOST: "true"
-      MINIO_ENDPOINT: minio.zelixa.my.id
-      MINIO_PORT: 443
+      MINIO_ENDPOINT: 43.129.54.11
+      MINIO_PORT: 9000
       MINIO_ACCESS_KEY: rizaldi
       MINIO_SECRET_KEY: 15031996
       MINIO_BUCKET: warung
-      MINIO_USE_SSL: "true"
+      MINIO_USE_SSL: "false"
 
       NEXT_PUBLIC_MINIO_URL: https://minio.zelixa.my.id
 
