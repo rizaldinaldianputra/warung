@@ -1,30 +1,70 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  warung-app:
-    container_name: warung-co-app
+  app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: warung-co-app
     restart: always
     ports:
       - "3010:3000"
     environment:
-      - DATABASE_URL=postgresql://rizaldi:15031996@postgres:5432/warung_indah
-      - NEXTAUTH_URL=https://app.zelixa.my.id
-      - NEXTAUTH_SECRET=co-system-secret-key-2026-v1
+      DATABASE_URL: postgresql://rizaldi:15031996@postgres:5432/warung_indah
 
-      - MINIO_ENDPOINT=minio
-      - MINIO_PORT=9000
-      - MINIO_ACCESS_KEY=rizaldi
-      - MINIO_SECRET_KEY=15031996
-      - MINIO_BUCKET=warung
-      - MINIO_USE_SSL=false
+      NEXTAUTH_URL: https://app.zelixa.my.id
+      NEXTAUTH_SECRET: co-system-secret-key-2026-v1
 
-      - NEXT_PUBLIC_MINIO_URL=https://minio.zelixa.my.id
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_ACCESS_KEY: rizaldi
+      MINIO_SECRET_KEY: 15031996
+      MINIO_BUCKET: warung
+      MINIO_USE_SSL: "false"
+
+      NEXT_PUBLIC_MINIO_URL: https://minio.zelixa.my.id
+
+    depends_on:
+      - postgres
+      - minio
+    networks:
+      - global-network
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: rizaldi
+      POSTGRES_PASSWORD: 15031996
+      POSTGRES_DB: warung_indah
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_pgdata:/var/lib/postgresql/data
+    networks:
+      - global-network
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    restart: always
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: rizaldi
+      MINIO_ROOT_PASSWORD: 15031996
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
     networks:
       - global-network
 
 networks:
   global-network:
-    external: true
+    driver: bridge
+
+volumes:
+  postgres_pgdata:
+  minio_data:
